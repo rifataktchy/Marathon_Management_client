@@ -8,6 +8,7 @@ import Home from "../components/Pages/Home";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../components/Pages/Login";
 import Register from "../components/Pages/Register";
+import CreateMarathon from "../components/Pages/CreateMarathon";
   
 
   const router = createBrowserRouter([
@@ -20,8 +21,8 @@ import Register from "../components/Pages/Register";
               element : <Home></Home>
        },
        {
-          path: '/allcampaigns',
-          element : <h1>hello</h1>
+          path: '/createmarathon',
+          element : <CreateMarathon></CreateMarathon>
          
       }, 
      
