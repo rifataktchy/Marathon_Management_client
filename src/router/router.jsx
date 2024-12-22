@@ -9,6 +9,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../components/Pages/Login";
 import Register from "../components/Pages/Register";
 import CreateMarathon from "../components/Pages/CreateMarathon";
+import AllMarathon from "../components/Pages/AllMerathon";
   
 
   const router = createBrowserRouter([
@@ -26,7 +27,11 @@ import CreateMarathon from "../components/Pages/CreateMarathon";
          
       }, 
      
-      
+      {
+        path: '/allmarathon',
+        element : <AllMarathon></AllMarathon>
+       
+    },
        {
           path: 'auth',
           element : <AuthLayout></AuthLayout>,

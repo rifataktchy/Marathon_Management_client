@@ -40,7 +40,7 @@ const CreateMarathon = () => {
       };
   
       // Save the marathon data to the database
-      fetch("https://example-server.com/marathons", {
+      fetch("http://localhost:5000/events", {
         method: "POST",
         headers: {
           "content-type": "application/json",
