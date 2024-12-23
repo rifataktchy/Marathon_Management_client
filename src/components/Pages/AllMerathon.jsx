@@ -1,73 +1,86 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
+import { useState } from "react";
 
 const AllMerathon = () => {
-    const [marathons, setMarathons] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const campaigns = useLoaderData();
+  const [loadedCampaigns, setLoadedCampaigns] = useState(campaigns);
+  const [isAscending, setIsAscending] = useState(true); // Track sort direction
 
-  useEffect(() => {
-    // Fetch all marathons from the backend
-    fetch("http://localhost:5000/events")
-      .then((res) => res.json())
-      .then((data) => {
-        setMarathons(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching marathons:", err);
-        setLoading(false);
-      });
-  }, []);
+  // Function to sort campaigns by minimum donation
+  const handleSort = () => {
+    const sortedCampaigns = [...loadedCampaigns].sort((a, b) => {
+      if (isAscending) {
+        return a.minimumDonation - b.minimumDonation; // Ascending
+      } else {
+        return b.minimumDonation - a.minimumDonation; // Descending
+      }
+    });
+    setLoadedCampaigns(sortedCampaigns);
+    setIsAscending(!isAscending); // Toggle sort direction
+  };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="loading loading-bars loading-md"></span>
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold text-center">All Campaigns</h1>
+      <p className="text-center text-gray-600 mt-2">Total campaigns: {campaigns.length}</p>
+
+      {/* Sort Button */}
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={handleSort}
+          className="btn bg-green-500 text-white hover:bg-green-400 px-4 py-2 rounded"
+        >
+          Sort by Minimum Donation ({isAscending ? "Ascending" : "Descending"})
+        </button>
       </div>
-    );
-  }
 
-    return (
-        <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold text-center mb-8">All Marathons</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {marathons.map((marathon) => (
+      {/* Cards Grid Layout */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+        {loadedCampaigns.map((campaign) => (
           <div
-            key={marathon._id}
-            className="card bg-base-100 shadow-md rounded-lg overflow-hidden"
+            key={campaign._id}
+            className="card bg-white shadow-md rounded-lg overflow-hidden border border-gray-300 hover:shadow-lg"
           >
             {/* Marathon Image */}
             <img
-              src={marathon.image}
-              alt={marathon.title}
+              src={campaign.image || "https://via.placeholder.com/400"} // Fallback image
+              alt={campaign.title}
               className="w-full h-48 object-cover"
             />
+
+            {/* Marathon Information */}
             <div className="p-4">
-              {/* Marathon Title */}
-              <h2 className="text-lg font-bold mb-2">{marathon.title}</h2>
-              {/* Marathon Location */}
-              <p className="text-sm text-gray-600 mb-2">
-                Location: {marathon.location}
+              <h2 className="text-xl font-bold text-gray-800">{campaign.title}</h2>
+              <p className="text-gray-600 mt-2">
+                <strong>Location:</strong> {campaign.location || "N/A"}
               </p>
-              {/* Registration Dates */}
-              <p className="text-sm text-gray-600 mb-2">
-                Registration: {marathon.startRegistrationDate} -{" "}
-                {marathon.endRegistrationDate}
+              <p className="text-gray-600 mt-2">
+                <strong>Registration Start:</strong>{" "}
+                {campaign.startRegistrationDate
+                  ? new Date(campaign.startRegistrationDate).toLocaleDateString()
+                  : "N/A"}
               </p>
-              {/* See Details Button */}
-              <button
-                onClick={() => navigate(`/marathons/${marathon._id}`)}
-                className="btn btn-primary mt-4"
-              >
-                See Details
-              </button>
+              <p className="text-gray-600 mt-2">
+                <strong>Registration End:</strong>{" "}
+                {campaign.endRegistrationDate
+                  ? new Date(campaign.endRegistrationDate).toLocaleDateString()
+                  : "N/A"}
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="p-4 border-t">
+              <Link to={`/merathon/${campaign._id}`}>
+                <button className="btn bg-green-500 hover:bg-green-400 text-white w-full rounded px-4 py-2">
+                  See More
+                </button>
+              </Link>
             </div>
           </div>
         ))}
       </div>
     </div>
-    );
+  );
 };
 
 export default AllMerathon;

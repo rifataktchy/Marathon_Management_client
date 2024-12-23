@@ -10,6 +10,7 @@ import Login from "../components/Pages/Login";
 import Register from "../components/Pages/Register";
 import CreateMarathon from "../components/Pages/CreateMarathon";
 import AllMarathon from "../components/Pages/AllMerathon";
+import MarathonDetails from "../components/Pages/MarathonDetails";
   
 
   const router = createBrowserRouter([
@@ -22,16 +23,21 @@ import AllMarathon from "../components/Pages/AllMerathon";
               element : <Home></Home>
        },
        {
-          path: '/createmarathon',
+          path: '/createmerathon',
           element : <CreateMarathon></CreateMarathon>
          
       }, 
      
       {
-        path: '/allmarathon',
-        element : <AllMarathon></AllMarathon>
-       
+        path: '/allmerathon',
+        element : <AllMarathon></AllMarathon>,
+        loader: () => fetch('http://localhost:5000/events')
     },
+    {
+      path: '/merathon/:id',
+      element: <MarathonDetails></MarathonDetails>,
+      loader: ({ params }) => fetch(`http://localhost:5000/merathon/${params.id}`),
+  },
        {
           path: 'auth',
           element : <AuthLayout></AuthLayout>,

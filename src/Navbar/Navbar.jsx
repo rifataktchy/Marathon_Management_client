@@ -40,8 +40,9 @@ const Navbar = () => {
 <div className="navbar-end hidden lg:flex">
     <ul className="menu menu-horizontal px-1 font-bold text-xl">
       {/* <li><NavLink to='/'>Home</NavLink></li> */}
-      <li><NavLink to='/createmarathon'>Create</NavLink></li>
-      <li><NavLink to='/allmarathon'>Merathons</NavLink></li>
+      <li><NavLink to='/createmerathon'>Create</NavLink></li>
+      <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
+      
       <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
      
      
