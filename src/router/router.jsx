@@ -11,6 +11,7 @@ import Register from "../components/Pages/Register";
 import CreateMarathon from "../components/Pages/CreateMarathon";
 import AllMarathon from "../components/Pages/AllMerathon";
 import MarathonDetails from "../components/Pages/MarathonDetails";
+import PrivateRoute from "./PrivateRoute";
   
 
   const router = createBrowserRouter([
@@ -24,7 +25,7 @@ import MarathonDetails from "../components/Pages/MarathonDetails";
        },
        {
           path: '/createmerathon',
-          element : <CreateMarathon></CreateMarathon>
+          element : (<PrivateRoute><CreateMarathon></CreateMarathon></PrivateRoute>),
          
       }, 
      
