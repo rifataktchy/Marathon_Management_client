@@ -11,7 +11,11 @@ import Register from "../components/Pages/Register";
 import CreateMarathon from "../components/Pages/CreateMarathon";
 import AllMarathon from "../components/Pages/AllMerathon";
 import MarathonDetails from "../components/Pages/MarathonDetails";
+import RegistrationForm from "../components/Pages/RegistrationForm";
 import PrivateRoute from "./PrivateRoute";
+import MyApplyList from "../components/Pages/MyApplyList";
+import MyMarathon from "../components/Pages/MyMarathon";
+import Dashboard from "../components/Pages/Dashboard";
   
 
   const router = createBrowserRouter([
@@ -36,9 +40,30 @@ import PrivateRoute from "./PrivateRoute";
     },
     {
       path: '/merathon/:id',
-      element: <MarathonDetails></MarathonDetails>,
+      element: (<PrivateRoute><MarathonDetails></MarathonDetails></PrivateRoute>),
       loader: ({ params }) => fetch(`http://localhost:5000/merathon/${params.id}`),
   },
+  {
+    path: "/register/:id",
+    element: <RegistrationForm></RegistrationForm>,
+    loader: ({ params }) => fetch(`http://localhost:5000/merathon/${params.id}`),
+  },
+  {
+    path: "/register",
+    element: (<PrivateRoute><MyApplyList></MyApplyList></PrivateRoute>),
+   
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+   
+  },
+  {
+    path: "/mymerathon",
+    element: (<PrivateRoute><MyMarathon></MyMarathon></PrivateRoute>),
+   
+  },
+  
        {
           path: 'auth',
           element : <AuthLayout></AuthLayout>,

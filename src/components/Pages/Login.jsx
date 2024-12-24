@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
     const { userLogin, setUser } = useContext(AuthContext);
@@ -26,17 +27,20 @@ const Login = () => {
                 const lastSignInTime = result?.user?.metadata?.lastSignInTime;
                 const loginInfo = { email, lastSignInTime };
 
-                fetch(`https://crowdcube-server-eight.vercel.app/users`, {
-                    method: "PATCH",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(loginInfo),
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        console.log("Sign-in info updated in DB", data);
-                    });
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => console.log(res.data))
+
+                // fetch(`https://crowdcube-server-eight.vercel.app/users`, {
+                //     method: "PATCH",
+                //     headers: {
+                //         "content-type": "application/json",
+                //     },
+                //     body: JSON.stringify(loginInfo),
+                // })
+                //     .then((res) => res.json())
+                //     .then((data) => {
+                //         console.log("Sign-in info updated in DB", data);
+                //     });
 
                 navigate(location?.state ? location.state : "/");
             })

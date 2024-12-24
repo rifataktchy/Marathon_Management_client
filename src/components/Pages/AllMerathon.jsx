@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const AllMerathon = () => {
   const campaigns = useLoaderData();
+  console.log("Campaigns data:", campaigns);
   const [loadedCampaigns, setLoadedCampaigns] = useState(campaigns);
   const [isAscending, setIsAscending] = useState(true); // Track sort direction
 

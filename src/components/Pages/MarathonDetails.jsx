@@ -4,7 +4,8 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../components/provider/AuthProvider";
 
 const MarathonDetails = () => {
-  const campaign = useLoaderData(); // Get the marathon details from the loader
+  const campaign = useLoaderData();
+  console.log(campaign) // Get the marathon details from the loader
   const { user } = useContext(AuthContext); // Get logged-in user details
   const [totalRegistrations, setTotalRegistrations] = useState(campaign.totalRegistrations || 0); // Track total registrations
   const navigate = useNavigate(); // For navigation

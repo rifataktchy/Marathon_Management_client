@@ -1,0 +1,239 @@
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../components/provider/AuthProvider";
+import Swal from "sweetalert2";
+import axios from "axios";
+
+const MyApplyList = () => {
+  const { user } = useContext(AuthContext); // Logged-in user context
+  const [registrations, setRegistrations] = useState([]); // User's registrations
+  const [selectedRegistration, setSelectedRegistration] = useState(null); // For update modal
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false); // Modal state
+
+  // Fetch user's registrations
+  useEffect(() => {
+    // fetch(`http://localhost:5000/register?email=${user.email}`)
+    //   .then((res) => res.json())
+    //   .then((data) => setRegistrations(data))
+    //   .catch((err) => console.error("Error fetching registrations:", err));
+    axios.get(`http://localhost:5000/register?email=${user.email}`,
+      {withCredentials: true})
+      .then(res => setRegistrations(res.data))
+  }, [user.email]);
+
+  // Open the update modal
+  const handleUpdate = (registration) => {
+    setSelectedRegistration(registration);
+    setIsUpdateModalOpen(true);
+  };
+
+  // Handle update submission
+  const handleUpdateSubmit = (updatedData) => {
+    fetch(`http://localhost:5000/register/${selectedRegistration._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: "Updated Successfully",
+            text: "Your registration details have been updated.",
+          });
+          // Update the UI
+          setRegistrations((prev) =>
+            prev.map((reg) =>
+              reg._id === selectedRegistration._id
+                ? { ...reg, ...updatedData }
+                : reg
+            )
+          );
+          setIsUpdateModalOpen(false); // Close modal
+        }
+      })
+      .catch((err) => console.error("Error updating registration:", err));
+  };
+
+  // Handle delete
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/register/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                icon: "success",
+                title: "Deleted!",
+                text: "Your registration has been removed.",
+              });
+              // Remove from UI
+              setRegistrations((prev) => prev.filter((reg) => reg._id !== id));
+            }
+          })
+          .catch((err) => console.error("Error deleting registration:", err));
+      }
+    });
+  };
+
+  return (
+    <div className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold text-center mb-6">My Apply List</h1>
+
+      {/* Registrations Table */}
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 px-4 py-2">Marathon Title</th>
+              <th className="border border-gray-300 px-4 py-2">Date</th>
+              <th className="border border-gray-300 px-4 py-2">Contact Number</th>
+              <th className="border border-gray-300 px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {registrations.map((registration) => (
+              <tr key={registration._id}>
+                <td className="border border-gray-300 px-4 py-2">
+                  {registration.title}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {new Date(registration.startDate).toLocaleDateString()}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {registration.contactNumber}
+                </td>
+                <td className="border border-gray-300 px-4 py-2 space-x-2">
+                  <button
+                    className="btn btn-sm btn-primary"
+                    onClick={() => handleUpdate(registration)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={() => handleDelete(registration._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Update Modal */}
+      {isUpdateModalOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
+            <h2 className="text-xl font-bold mb-4">Update Registration</h2>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const updatedData = {
+                  contactNumber: e.target.contactNumber.value,
+                  additionalInfo: e.target.additionalInfo.value,
+                };
+                handleUpdateSubmit(updatedData);
+              }}
+            >
+              {/* Marathon Title (Read-Only) */}
+              <div className="mb-4">
+                <label
+                  htmlFor="marathonTitle"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Marathon Title
+                </label>
+                <input
+                  id="marathonTitle"
+                  type="text"
+                  value={selectedRegistration.title}
+                  readOnly
+                  className="input input-bordered w-full"
+                />
+              </div>
+
+              {/* Marathon Start Date (Read-Only) */}
+              <div className="mb-4">
+                <label
+                  htmlFor="marathonStartDate"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Marathon Start Date
+                </label>
+                <input
+                  id="marathonStartDate"
+                  type="text"
+                  value={new Date(
+                    selectedRegistration.startDate
+                  ).toLocaleDateString()}
+                  readOnly
+                  className="input input-bordered w-full"
+                />
+              </div>
+
+              {/* Contact Number */}
+              <div className="mb-4">
+                <label
+                  htmlFor="contactNumber"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Contact Number
+                </label>
+                <input
+                  id="contactNumber"
+                  type="text"
+                  defaultValue={selectedRegistration.contactNumber}
+                  className="input input-bordered w-full"
+                />
+              </div>
+
+              {/* Additional Info */}
+              <div className="mb-4">
+                <label
+                  htmlFor="additionalInfo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Additional Info
+                </label>
+                <textarea
+                  id="additionalInfo"
+                  defaultValue={selectedRegistration.additionalInfo}
+                  className="textarea textarea-bordered w-full"
+                ></textarea>
+              </div>
+
+              <div className="flex justify-end space-x-2">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setIsUpdateModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyApplyList;
