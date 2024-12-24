@@ -11,11 +11,11 @@ const MyApplyList = () => {
 
   // Fetch user's registrations
   useEffect(() => {
-    // fetch(`http://localhost:5000/register?email=${user.email}`)
+    // fetch(`https://merathon-server.vercel.app/register?email=${user.email}`)
     //   .then((res) => res.json())
     //   .then((data) => setRegistrations(data))
     //   .catch((err) => console.error("Error fetching registrations:", err));
-    axios.get(`http://localhost:5000/register?email=${user.email}`,
+    axios.get(`https://merathon-server.vercel.app/register?email=${user.email}`,
       {withCredentials: true})
       .then(res => setRegistrations(res.data))
   }, [user.email]);
@@ -28,7 +28,7 @@ const MyApplyList = () => {
 
   // Handle update submission
   const handleUpdateSubmit = (updatedData) => {
-    fetch(`http://localhost:5000/register/${selectedRegistration._id}`, {
+    fetch(`https://merathon-server.vercel.app/register/${selectedRegistration._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const MyApplyList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/register/${id}`, {
+        fetch(`https://merathon-server.vercel.app/register/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

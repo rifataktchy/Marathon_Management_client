@@ -36,17 +36,17 @@ import Dashboard from "../components/Pages/Dashboard";
       {
         path: '/allmerathon',
         element : <AllMarathon></AllMarathon>,
-        loader: () => fetch('http://localhost:5000/events')
+        loader: () => fetch('https://merathon-server.vercel.app/events')
     },
     {
       path: '/merathon/:id',
       element: (<PrivateRoute><MarathonDetails></MarathonDetails></PrivateRoute>),
-      loader: ({ params }) => fetch(`http://localhost:5000/merathon/${params.id}`),
+      loader: ({ params }) => fetch(`https://merathon-server.vercel.app/merathon/${params.id}`),
   },
   {
     path: "/register/:id",
     element: <RegistrationForm></RegistrationForm>,
-    loader: ({ params }) => fetch(`http://localhost:5000/merathon/${params.id}`),
+    loader: ({ params }) => fetch(`https://merathon-server.vercel.app/merathon/${params.id}`),
   },
   {
     path: "/register",

@@ -10,7 +10,7 @@ const MyMarathon = () => {
 
   // Fetch user's marathons
   useEffect(() => {
-    fetch(`http://localhost:5000/events?email=${user.email}`)
+    fetch(`https://merathon-server.vercel.app/events?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setMarathons(data))
       .catch((err) => console.error("Error fetching marathons:", err));
@@ -24,7 +24,7 @@ const MyMarathon = () => {
 
   // Handle update submission
   const handleUpdateSubmit = (updatedData) => {
-    fetch(`http://localhost:5000/events/${selectedMarathon._id}`, {
+    fetch(`https://merathon-server.vercel.app/events/${selectedMarathon._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const MyMarathon = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/events/${id}`, {
+        fetch(`https://merathon-server.vercel.app/events/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

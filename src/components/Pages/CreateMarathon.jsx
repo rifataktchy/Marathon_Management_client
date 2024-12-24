@@ -40,7 +40,7 @@ const CreateMarathon = () => {
       };
   
       // Save the marathon data to the database
-      fetch("http://localhost:5000/events", {
+      fetch("https://merathon-server.vercel.app/events", {
         method: "POST",
         headers: {
           "content-type": "application/json",

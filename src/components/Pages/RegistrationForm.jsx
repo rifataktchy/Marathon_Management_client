@@ -44,7 +44,7 @@ const RegistrationForm = () => {
     };
 
     // Save registration details in the database
-    fetch("http://localhost:5000/register", {
+    fetch("https://merathon-server.vercel.app/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

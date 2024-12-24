@@ -27,7 +27,7 @@ const Login = () => {
                 const lastSignInTime = result?.user?.metadata?.lastSignInTime;
                 const loginInfo = { email, lastSignInTime };
 
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                axios.post('https://merathon-server.vercel.app/jwt', user, { withCredentials: true })
                     .then(res => console.log(res.data))
 
                 // fetch(`https://crowdcube-server-eight.vercel.app/users`, {
