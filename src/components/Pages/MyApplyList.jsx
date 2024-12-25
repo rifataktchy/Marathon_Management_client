@@ -6,19 +6,33 @@ import axios from "axios";
 const MyApplyList = () => {
   const { user } = useContext(AuthContext); // Logged-in user context
   const [registrations, setRegistrations] = useState([]); // User's registrations
+  const [filteredRegistrations, setFilteredRegistrations] = useState([]); // Filtered registrations for search
+  const [searchQuery, setSearchQuery] = useState(""); // Search input value
   const [selectedRegistration, setSelectedRegistration] = useState(null); // For update modal
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false); // Modal state
 
   // Fetch user's registrations
   useEffect(() => {
-    // fetch(`https://merathon-server.vercel.app/register?email=${user.email}`)
-    //   .then((res) => res.json())
-    //   .then((data) => setRegistrations(data))
-    //   .catch((err) => console.error("Error fetching registrations:", err));
-    axios.get(`https://merathon-server.vercel.app/register?email=${user.email}`,
-      {withCredentials: true})
-      .then(res => setRegistrations(res.data))
+    axios
+      .get(`https://merathon-server.vercel.app/register?email=${user.email}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setRegistrations(res.data);
+        setFilteredRegistrations(res.data); // Initialize filtered with full data
+      })
+      .catch((err) => console.error("Error fetching registrations:", err));
   }, [user.email]);
+
+  // Search functionality (case-insensitive)
+  useEffect(() => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    setFilteredRegistrations(
+      registrations.filter((registration) =>
+        registration.title.toLowerCase().includes(lowercasedQuery)
+      )
+    );
+  }, [searchQuery, registrations]);
 
   // Open the update modal
   const handleUpdate = (registration) => {
@@ -91,11 +105,22 @@ const MyApplyList = () => {
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold text-center mb-6">My Apply List</h1>
 
+      {/* Search Bar */}
+      <div className="mb-6 text-black">
+        <input
+          type="text"
+          placeholder="Search by Marathon Title"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="input input-bordered w-full"
+        />
+      </div>
+
       {/* Registrations Table */}
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 text-black">
               <th className="border border-gray-300 px-4 py-2">Marathon Title</th>
               <th className="border border-gray-300 px-4 py-2">Date</th>
               <th className="border border-gray-300 px-4 py-2">Contact Number</th>
@@ -103,33 +128,44 @@ const MyApplyList = () => {
             </tr>
           </thead>
           <tbody>
-            {registrations.map((registration) => (
-              <tr key={registration._id}>
-                <td className="border border-gray-300 px-4 py-2">
-                  {registration.title}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {new Date(registration.startDate).toLocaleDateString()}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {registration.contactNumber}
-                </td>
-                <td className="border border-gray-300 px-4 py-2 space-x-2">
-                  <button
-                    className="btn btn-sm btn-primary"
-                    onClick={() => handleUpdate(registration)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="btn btn-sm btn-danger"
-                    onClick={() => handleDelete(registration._id)}
-                  >
-                    Delete
-                  </button>
+            {filteredRegistrations.length > 0 ? (
+              filteredRegistrations.map((registration) => (
+                <tr key={registration._id}>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {registration.title}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {new Date(registration.startDate).toLocaleDateString()}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {registration.contactNumber}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2 space-x-2">
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={() => handleUpdate(registration)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(registration._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="4"
+                  className="border border-gray-300 px-4 py-2 text-center"
+                >
+                  No registrations found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -137,7 +173,7 @@ const MyApplyList = () => {
       {/* Update Modal */}
       {isUpdateModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
+          <div className="bg-customOrange text-black p-6 rounded-md shadow-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Update Registration</h2>
             <form
               onSubmit={(e) => {
@@ -150,7 +186,7 @@ const MyApplyList = () => {
               }}
             >
               {/* Marathon Title (Read-Only) */}
-              <div className="mb-4">
+              <div className="mb-4 text-black">
                 <label
                   htmlFor="marathonTitle"
                   className="block text-sm font-medium text-gray-700"
