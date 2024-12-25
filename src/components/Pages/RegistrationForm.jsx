@@ -84,10 +84,10 @@ const RegistrationForm = () => {
     }
 
   return (
-    <div className="p-6 max-w-lg mx-auto">
+    <div className="p-6 max-w-lg mx-auto text-white">
       <h1 className="text-3xl font-bold text-center mb-4">Register for Marathon</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 text-black">
         {/* Email (Read-only) */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -193,7 +193,7 @@ const RegistrationForm = () => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className="btn  bg-customOrange hover:bg-orange-800 border-none w-full">
           Register
         </button>
       </form>

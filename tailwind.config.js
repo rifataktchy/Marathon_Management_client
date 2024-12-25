@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customOrange: "rgba(236, 100, 8, 0.837)",
+      },
+    },
   },
   plugins: [
     require('daisyui'),

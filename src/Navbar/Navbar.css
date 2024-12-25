@@ -1,7 +1,7 @@
 .active{
-    background-color: rgba(68, 163, 76, 0.837);
+    background-color: rgba(236, 100, 8, 0.837);
 }
 .menu li > *:not(ul, .menu-title, details, .btn):active, .menu li > *:not(ul, .menu-title, details, .btn).active, .menu li > details > summary:active {
     --tw-bg-opacity: 1;
-    background-color: rgba(68, 163, 76, 0.837);
+    background-color: rgba(236, 100, 8, 0.837);
  color: rgb(250, 247, 247);}

@@ -26,25 +26,35 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex={0}
-        className="menu  font-bold bg-green-500 menu-sm dropdown-content rounded-box z-50 mt-3 w-52 p-2 shadow">
+        className="menu  font-bold bg-orange-400 menu-sm dropdown-content rounded-box z-50 mt-3 w-52 p-2 shadow">
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/dash'>Dashboard</NavLink></li>
-      {/* <li><NavLink to='/allcampaigns'>All Campaigns</NavLink></li>
-      <li><NavLink to='/newcampaign'>Add New Campaign</NavLink></li>
-      <li><NavLink to='/mycampaigns'>My Campaign</NavLink></li>
-      <li><NavLink to='/mydonations'>My Donation</NavLink></li> */}
-      </ul>
-    </div>
-    <Link className="" to='/'><img className="h-20 w-20 rounded-full" src={logo} alt=""/></Link>
-  </div>
-<div className="navbar-end hidden lg:flex">
-    <ul className="menu menu-horizontal px-1 font-bold text-xl">
-      {/* <li><NavLink to='/'>Home</NavLink></li> */}
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
       <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
       {/* <li><NavLink to='/register'>My Apply</NavLink></li>
       <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
-      <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+      {
+      user && user?.email ? (
+        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+      ) : ""
+     }
+      {/* <li><NavLink to='/dashboard'>Dashboard</NavLink></li> */}
+      </ul>
+    </div>
+    <Link className="" to='/'><img className="h-20 w-20 rounded-full" src={logo} alt=""/></Link>
+  </div>
+<div className="navbar-end flex-grow hidden lg:flex">
+    <ul className="menu menu-horizontal px-1 font-bold text-xl">
+      <li><NavLink to='/'>Home</NavLink></li>
+      {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
+      <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
+      {/* <li><NavLink to='/register'>My Apply</NavLink></li>
+      <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
+      {
+      user && user?.email ? (
+        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+      ) : ""
+     }
+      {/* <li><NavLink to='/dashboard'>Dashboard</NavLink></li> */}
      
      
     </ul>
@@ -66,7 +76,7 @@ const Navbar = () => {
       </div>
       ) : (
      <NavLink className="p-2 rounded-lg font-bold text-xl" to="/auth/register">
-      Signup
+      Register
      </NavLink>
      )
      }

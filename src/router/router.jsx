@@ -26,6 +26,7 @@ import Dashboard from "../components/Pages/Dashboard";
           {
                path: '/',
               element : <Home></Home>
+              // loader: () => fetch('https://merathon-server.vercel.app/sixevents')
        },
        {
           path: '/createmerathon',
@@ -55,7 +56,7 @@ import Dashboard from "../components/Pages/Dashboard";
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (<PrivateRoute><Dashboard></Dashboard></PrivateRoute>),
    
   },
   {

@@ -24,7 +24,7 @@ const MarathonDetails = () => {
   }, [campaign]);
 
   return (
-    <div className="p-6 flex flex-col items-center justify-center">
+    <div className="p-6 flex flex-col items-center justify-center text-white">
       {/* Marathon Image */}
       <img
         src={campaign.image || "https://via.placeholder.com/600"}
@@ -98,7 +98,7 @@ const MarathonDetails = () => {
           }}
           className={`btn px-6 py-2 rounded ${
             isRegistrationOpen()
-              ? "bg-green-500 hover:bg-green-400 text-white"
+              ? "bg-customOrange hover:bg-orange-800 border-none text-white"
               : "bg-gray-400 text-gray-700 cursor-not-allowed"
           }`}
           disabled={!isRegistrationOpen()}

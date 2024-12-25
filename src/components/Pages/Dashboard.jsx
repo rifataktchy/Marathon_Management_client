@@ -8,12 +8,12 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('add'); // Default active tab
 
   // Check if user is authenticated (you can change this logic depending on how you're handling authentication)
-  const isAuthenticated = localStorage.getItem('token'); // Assuming token is stored in localStorage
+  // const isAuthenticated = localStorage.getItem('token'); // Assuming token is stored in localStorage
 
   // Redirect to login if not authenticated
-  if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/auth/login" replace />;
+  // }
 
   // Components to render based on activeTab
   const renderTabContent = () => {
@@ -25,20 +25,20 @@ const Dashboard = () => {
       case 'apply':
         return <MyApplyList />;
       default:
-        return <CreateMarathon />;
+        return <h1>Your Dashboard is here</h1>;
     }
   };
 
   return (
     <div className="dashboard-container flex">
       {/* Left Sidebar with Tab Navigation */}
-      <div className="tabs w-1/4 bg-gray-200 p-4">
-        <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+      <div className="w-1/4 p-4">
+        <h2 className="text-xl font-bold mb-4"></h2>
         <ul className="space-y-2">
           <li>
             <button
               onClick={() => setActiveTab('add')}
-              className={`block py-2 px-4 rounded ${activeTab === 'add' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              className={`block py-2 px-4 rounded ${activeTab === 'add' ? 'bg-customOrange text-white' : 'text-gray-700'}`}
             >
               Add Marathon
             </button>
@@ -46,7 +46,7 @@ const Dashboard = () => {
           <li>
             <button
               onClick={() => setActiveTab('marathon')}
-              className={`block py-2 px-4 rounded ${activeTab === 'marathon' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              className={`block py-2 px-4 rounded ${activeTab === 'marathon' ? 'bg-customOrange text-white' : 'text-gray-700'}`}
             >
               My Marathons
             </button>
@@ -54,7 +54,7 @@ const Dashboard = () => {
           <li>
             <button
               onClick={() => setActiveTab('apply')}
-              className={`block py-2 px-4 rounded ${activeTab === 'apply' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              className={`block py-2 px-4 rounded ${activeTab === 'apply' ? 'bg-customOrange text-white' : 'text-gray-700'}`}
             >
               My Applications
             </button>

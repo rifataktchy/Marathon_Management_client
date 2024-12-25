@@ -91,7 +91,7 @@ const MyMarathon = () => {
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-orange-300">
               <th className="border border-gray-300 px-4 py-2">Marathon Title</th>
               <th className="border border-gray-300 px-4 py-2">Date</th>
               <th className="border border-gray-300 px-4 py-2">Location</th>
@@ -112,13 +112,13 @@ const MyMarathon = () => {
                 </td>
                 <td className="border border-gray-300 px-4 py-2 space-x-2">
                   <button
-                    className="btn btn-sm btn-primary"
+                    className="btn btn-sm bg-customOrange hover:bg-orange-800 border-none"
                     onClick={() => handleUpdate(marathon)}
                   >
                     Update
                   </button>
                   <button
-                    className="btn btn-sm btn-danger"
+                    className="btn btn-sm  bg-customOrange hover:bg-orange-800 border-none"
                     onClick={() => handleDelete(marathon._id)}
                   >
                     Delete

@@ -71,7 +71,7 @@ const CreateMarathon = () => {
   
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="card bg-base-100 w-full max-w-lg shadow-2xl p-10 mb-6">
+        <div className="card bg-orange-300 w-full max-w-lg shadow-2xl p-10 mb-6">
           <h1 className="text-2xl font-bold text-center dark:text-black">Add New Marathon</h1>
           <form onSubmit={handleAddMarathon} className="card-body dark:text-black">
             {/* Marathon Title */}
