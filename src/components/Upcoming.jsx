@@ -1,67 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const staticMarathons = [
-  {
-    id: 1,
-    title: "City Run 2024",
-    location: "New York City",
-    date: "2024-01-15",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 2,
-    title: "Beach Marathon",
-    location: "Santa Monica",
-    date: "2024-02-10",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 3,
-    title: "Spring Marathon",
-    location: "Chicago",
-    date: "2024-03-25",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 4,
-    title: "Night Run",
-    location: "Las Vegas",
-    date: "2024-04-05",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 5,
-    title: "Mountain Challenge",
-    location: "Denver",
-    date: "2024-05-15",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 6,
-    title: "Desert Dash",
-    location: "Phoenix",
-    date: "2024-06-20",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 7,
-    title: "Golden Gate Run",
-    location: "San Francisco",
-    date: "2024-07-10",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 8,
-    title: "Capital Marathon",
-    location: "Washington D.C.",
-    date: "2024-08-15",
-    image: "https://via.placeholder.com/400",
-  },
-];
 
 const shuffleAndSelect = (array, count) => {
   const shuffled = [...array].sort(() => 0.5 - Math.random());
@@ -69,17 +10,32 @@ const shuffleAndSelect = (array, count) => {
 };
 
 const Upcoming = () => {
-  const selectedMarathons = shuffleAndSelect(staticMarathons, 6);
+  const [marathons, setMarathons] = useState([]);
+
+  useEffect(() => {
+    // Fetch the marathon data from the JSON file
+    const fetchMarathons = async () => {
+      try {
+        const response = await fetch("/marathons.json"); // Adjust the path if necessary
+        const data = await response.json();
+        setMarathons(shuffleAndSelect(data, 6)); // Shuffle and select 6 marathons
+      } catch (error) {
+        console.error("Error fetching marathon data:", error);
+      }
+    };
+
+    fetchMarathons();
+  }, []);
 
   // Slider settings for react-slick
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Number of cards visible at once
+    slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true, // Enables auto sliding
-    autoplaySpeed: 1000, // Time (in ms) between each slide
+    autoplay: true,
+    autoplaySpeed: 1000,
     responsive: [
       {
         breakpoint: 1024,
@@ -95,10 +51,9 @@ const Upcoming = () => {
       },
     ],
   };
-  
 
   return (
-    <section className="upcoming-marathons  py-12">
+    <section className="upcoming-marathons py-12">
       <div className="max-w-screen-xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-center mb-8">
           Upcoming Marathons
@@ -106,7 +61,7 @@ const Upcoming = () => {
 
         {/* Slider Component */}
         <Slider {...settings}>
-          {selectedMarathons.map((marathon) => (
+          {marathons.map((marathon) => (
             <div key={marathon.id} className="p-2">
               <div className="card shadow-md rounded-lg overflow-hidden border border-gray-300 hover:shadow-lg">
                 {/* Image */}
@@ -129,7 +84,6 @@ const Upcoming = () => {
                     {new Date(marathon.date).toLocaleDateString()}
                   </p>
                 </div>
-
               </div>
             </div>
           ))}
@@ -140,4 +94,5 @@ const Upcoming = () => {
 };
 
 export default Upcoming;
+
 

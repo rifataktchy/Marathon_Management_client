@@ -28,21 +28,17 @@ const Login = () => {
                 const loginInfo = { email, lastSignInTime };
 
                 axios.post('https://merathon-server.vercel.app/jwt', user, { withCredentials: true })
-                    .then(res => console.log(res.data))
+                    .then(res => console.log(res.data));
 
-                // fetch(`https://crowdcube-server-eight.vercel.app/users`, {
-                //     method: "PATCH",
-                //     headers: {
-                //         "content-type": "application/json",
-                //     },
-                //     body: JSON.stringify(loginInfo),
-                // })
-                //     .then((res) => res.json())
-                //     .then((data) => {
-                //         console.log("Sign-in info updated in DB", data);
-                //     });
-
-                navigate(location?.state ? location.state : "/");
+                // Show SweetAlert for successful login
+                Swal.fire({
+                    icon: "success",
+                    title: "Login Successful",
+                    text: "Welcome back! You have successfully logged in.",
+                    confirmButtonColor: "#28a745",
+                }).then(() => {
+                    navigate(location?.state ? location.state : "/");
+                });
             })
             .catch((err) => {
                 setError({ ...error, login: err.code });
@@ -52,7 +48,7 @@ const Login = () => {
                     icon: "error",
                     title: "Login Failed",
                     text: `Reason: ${err.message}`,
-                    confirmButtonColor: "#FF0000", // Custom color for button
+                    confirmButtonColor: "#FF0000",
                 });
             });
     };
@@ -66,12 +62,20 @@ const Login = () => {
                 const user = result.user;
                 setUser(user);
 
-                navigate(location?.state ? location.state : "/");
+                // Show SweetAlert for successful Google sign-in
+                Swal.fire({
+                    icon: "success",
+                    title: "Google Sign-In Successful",
+                    text: "Welcome back! You have successfully signed in with Google.",
+                    confirmButtonColor: "#28a745",
+                }).then(() => {
+                    navigate(location?.state ? location.state : "/");
+                });
             })
             .catch((err) => {
                 setError({ ...error, google: err.message });
 
-                // SweetAlert2 popup for error
+                // SweetAlert2 error alert
                 Swal.fire({
                     icon: "error",
                     title: "Google Sign-In Failed",
@@ -150,4 +154,3 @@ const Login = () => {
 };
 
 export default Login;
-
