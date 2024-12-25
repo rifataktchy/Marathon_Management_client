@@ -18,6 +18,7 @@ import MyMarathon from "../components/Pages/MyMarathon";
 import Dashboard from "../components/Pages/Dashboard";
 import NotFoundRedirect from "../components/Pages/NotFoundRedirect";
 
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -26,6 +27,7 @@ import NotFoundRedirect from "../components/Pages/NotFoundRedirect";
           {
                path: '/',
               element : <Home></Home>
+  
               // loader: () => fetch('https://merathon-server.vercel.app/sixevents')
        },
        {

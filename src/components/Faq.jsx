@@ -19,12 +19,12 @@ const Faq = () => {
       {
         question: "How can I register for a marathon?",
         answer:
-          "You can register for a marathon by visiting the 'My Applications' section, selecting your desired event, and completing the registration process online.",
+          "You can register for a marathon by visiting the 'register' section, selecting your desired event, and completing the registration process online.",
       },
       {
         question: "Are there any fees to use this platform?",
         answer:
-          "The platform itself is free to browse. However, registration fees may vary depending on the specific marathon or event organizer.",
+          "The platform itself is free.you can join free",
       },
       {
         question: "How can I track my marathon results?",

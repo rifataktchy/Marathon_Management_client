@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'; // To redirect to the login page
 import CreateMarathon from '../Pages/CreateMarathon'; // Component to add a marathon
 import MyMarathon from '../Pages/MyMarathon'; // Marathon list management
 import MyApplyList from '../Pages/MyApplyList'; // User's applied marathons
-
+import useDynamicTitle from '../useDynamicTitle';
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('home'); // Default active tab
 
@@ -30,6 +30,7 @@ const Dashboard = () => {
         return <h1>Page not found</h1>; // Default fallback content
     }
   };
+  useDynamicTitle();
 
   return (
     <div className="dashboard-container flex text-white">

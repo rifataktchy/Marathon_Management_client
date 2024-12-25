@@ -1,14 +1,14 @@
 import { useLoaderData, Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-
+import useDynamicTitle from '../useDynamicTitle';
 const AllMerathon = () => {
   const campaigns = useLoaderData();
   const {user,logOut} = useContext(AuthContext);
   console.log("Campaigns data:", campaigns);
   const [loadedCampaigns, setLoadedCampaigns] = useState(campaigns);
   const [isAscending, setIsAscending] = useState(true); // Track sort direction
-
+  useDynamicTitle();
   const navigate = useNavigate();
 
   const handleRedirect = () => {

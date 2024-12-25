@@ -72,8 +72,8 @@ const CreateMarathon = () => {
     return (
       <div className="min-h-screen flex justify-center items-center">
         <div className="card bg-orange-300 w-full max-w-lg shadow-2xl p-10 mb-6">
-          <h1 className="text-2xl font-bold text-center dark:text-black">Add New Marathon</h1>
-          <form onSubmit={handleAddMarathon} className="card-body dark:text-black">
+          <h1 className="text-2xl font-bold text-center text-black">Add New Marathon</h1>
+          <form onSubmit={handleAddMarathon} className="card-body text-black">
             {/* Marathon Title */}
             <div className="form-control">
               <label className="label">
@@ -214,7 +214,7 @@ const CreateMarathon = () => {
   
             {/* Submit Button */}
             <div className="form-control mt-6">
-              <button type="submit" className="btn bg-bred-300 hover:bg-blue-400 text-white">
+              <button type="submit" className="btn bg-customOrange hover:bg-orange-800 text-white">
                 Submit
               </button>
             </div>
