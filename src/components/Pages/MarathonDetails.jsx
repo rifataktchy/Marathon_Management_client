@@ -5,7 +5,7 @@ import { AuthContext } from "../../components/provider/AuthProvider";
 
 const MarathonDetails = () => {
   const campaign = useLoaderData();
-  console.log(campaign) // Get the marathon details from the loader
+  console.log(campaign.registrationCount) // Get the marathon details from the loader
   const { user } = useContext(AuthContext); // Get logged-in user details
   const [totalRegistrations, setTotalRegistrations] = useState(campaign.totalRegistrations || 0); // Track total registrations
   const navigate = useNavigate(); // For navigation
@@ -75,7 +75,7 @@ const MarathonDetails = () => {
           <strong>Creator:</strong> {campaign.userName} ({campaign.userEmail})
         </p>
         <p className="text-lg">
-          <strong>Total Registrations:</strong> {totalRegistrations}
+          <strong>Total Registrations:</strong> {campaign.registrationCount}
         </p>
       </div>
 
