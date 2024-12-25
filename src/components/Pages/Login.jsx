@@ -123,7 +123,7 @@ const Login = () => {
                         </label>
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn bg-green-500 hover:bg-green-400 text-white">
+                        <button className="btn bg-customOrange hover:bg-orange-800 text-white">
                             Login
                         </button>
                     </div>
@@ -132,7 +132,7 @@ const Login = () => {
                 <div className="form-control">
                     <button
                         onClick={handleGoogleSignIn}
-                        className="btn  bg-green-500 hover:bg-green-400 text-white"
+                        className="btn  bg-customOrange hover:bg-orange-800 text-white"
                     >
                         Continue with Google
                     </button>

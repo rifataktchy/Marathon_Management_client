@@ -26,8 +26,10 @@ const MyMarathon = () => {
   const handleUpdateSubmit = (updatedData) => {
     fetch(`https://merathon-server.vercel.app/events/${selectedMarathon._id}`, {
       method: "PUT",
+     
       headers: {
         "Content-Type": "application/json",
+
       },
       body: JSON.stringify(updatedData),
     })

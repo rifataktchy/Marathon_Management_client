@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick"; // npm install react-slick slick-carousel
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,11 +10,21 @@ import slide3 from "../../assets/slide3.jpg";
 import marathonImage from "../../assets/marathon.png"; // Replace with your image path
 import Loading from "./Loading";
 import Upcoming from "../Upcoming";
+import Faq from "../Faq";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Home = () => {
   const [animateImage, setAnimateImage] = useState(false);
   const [loadedCampaigns, setLoadedCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {user,logOut} = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleRedirect = (campaignId) => {
+    // Redirect to login with the current page path stored in state
+    navigate('/auth/login', { state: `/merathon/${campaignId}` });
+  };
 
   // Trigger animation after 5 seconds
   useEffect(() => {
@@ -148,18 +158,29 @@ const Home = () => {
 
         {/* Actions */}
         <div className="p-4 border-t">
-          <Link to={`/merathon/${campaign._id}`}>
-            <button className="btn bg-customOrange hover:bg-orange-800 border-none text-white w-full rounded px-4 py-2">
-              See More
-            </button>
-          </Link>
+        {
+      user && user?.email ? (
+        <Link to={`/merathon/${campaign._id}`}>
+                <button className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2">
+                  See Details
+                </button>
+              </Link>
+      ) : (
+         <button
+          className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2"
+          onClick={() => handleRedirect(campaign._id)}
+        >
+          See Details
+        </button>
+     )
+     }
         </div>
       </div>
     ))
   )}
 </div>
 
-{/* Extra Section 1: Marathon Management System */}
+{/* Extra Section 1*/}
 <section className="marathon-section  py-12">
         <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left: Image */}
@@ -205,7 +226,8 @@ const Home = () => {
 
 {/* Upcoming marathon Section */}
 <Upcoming></Upcoming>
-
+{/* extra section 2*/}
+<Faq></Faq>
     </div>
   );
 };

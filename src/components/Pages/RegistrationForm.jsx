@@ -84,7 +84,7 @@ const RegistrationForm = () => {
     }
 
   return (
-    <div className="p-6 max-w-lg mx-auto text-white">
+    <div className="p-6 max-w-lg mx-auto text-black">
       <h1 className="text-3xl font-bold text-center mb-4">Register for Marathon</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4 text-black">

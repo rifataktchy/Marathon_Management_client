@@ -1,12 +1,20 @@
-import { useLoaderData, Link } from "react-router-dom";
-import { useState } from "react";
+import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AllMerathon = () => {
   const campaigns = useLoaderData();
+  const {user,logOut} = useContext(AuthContext);
   console.log("Campaigns data:", campaigns);
   const [loadedCampaigns, setLoadedCampaigns] = useState(campaigns);
   const [isAscending, setIsAscending] = useState(true); // Track sort direction
 
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    // Redirect to login with the current page path stored in state
+    navigate('/auth/login', { state: `/merathon/${campaigns._id}` });
+  };
   // // Function to sort campaigns by minimum donation
   // const handleSort = () => {
   //   // const sortedCampaigns = [...loadedCampaigns].sort((a, b) => {
@@ -44,7 +52,7 @@ const AllMerathon = () => {
           >
             {/* Marathon Image */}
             <img
-              src={campaign.image || "https://via.placeholder.com/400"} // Fallback image
+              src={campaign.image || " "} // Fallback image
               alt={campaign.title}
               className="w-full h-48 object-cover"
             />
@@ -71,11 +79,27 @@ const AllMerathon = () => {
 
             {/* Actions */}
             <div className="p-4 border-t">
-              <Link to={`/merathon/${campaign._id}`}>
+            {
+      user && user?.email ? (
+        <Link to={`/merathon/${campaign._id}`}>
                 <button className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2">
-                  See More
+                  See Details
                 </button>
               </Link>
+      ) : (
+         <button
+          className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2"
+          onClick={handleRedirect}
+        >
+          See Details
+        </button>
+     )
+     }
+              {/* <Link to={`/merathon/${campaign._id}`}>
+                <button className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2">
+                  See Details
+                </button>
+              </Link> */}
             </div>
           </div>
         ))}

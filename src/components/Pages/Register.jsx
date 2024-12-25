@@ -170,7 +170,7 @@ const Register = () => {
 
           {/* Submit Button */}
           <div className="form-control mt-6">
-            <button type="submit" className="btn bg-green-500 hover:bg-green-400 text-white">
+            <button type="submit" className="btn  bg-customOrange hover:bg-orange-800 text-white">
               Register
             </button>
           </div>
@@ -182,7 +182,7 @@ const Register = () => {
         {/* Google Sign-in Button */}
         <div className="divider">OR</div>
         <div className="form-control">
-          <button onClick={handleGoogleSignIn} className="btn  bg-green-500 hover:bg-green-400 text-white">
+          <button onClick={handleGoogleSignIn} className="btn  bg-customOrange hover:bg-orange-800 text-white">
             Continue with Google
           </button>
         </div>
