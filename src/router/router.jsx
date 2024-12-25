@@ -16,7 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import MyApplyList from "../components/Pages/MyApplyList";
 import MyMarathon from "../components/Pages/MyMarathon";
 import Dashboard from "../components/Pages/Dashboard";
-  
+import NotFoundRedirect from "../components/Pages/NotFoundRedirect";
 
   const router = createBrowserRouter([
     {
@@ -85,7 +85,7 @@ import Dashboard from "../components/Pages/Dashboard";
   
   {
       path: '*',
-      element : <h1>not</h1>
+      element : <NotFoundRedirect></NotFoundRedirect>
   },
  
 ]);

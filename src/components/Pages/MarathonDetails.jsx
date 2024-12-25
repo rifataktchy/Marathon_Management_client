@@ -4,10 +4,9 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../components/provider/AuthProvider";
 
 const MarathonDetails = () => {
-  const campaign = useLoaderData();
-  console.log(campaign.registrationCount) // Get the marathon details from the loader
+  const campaign = useLoaderData(); // Get marathon details from loader
   const { user } = useContext(AuthContext); // Get logged-in user details
-  const [totalRegistrations, setTotalRegistrations] = useState(campaign.totalRegistrations || 0); // Track total registrations
+  const [totalRegistrations, setTotalRegistrations] = useState(campaign.registrationCount || 0); // Track total registrations
   const navigate = useNavigate(); // For navigation
 
   // Function to check if registration is open
@@ -20,8 +19,8 @@ const MarathonDetails = () => {
 
   useEffect(() => {
     // Optionally fetch updated registration counts from an API
-    setTotalRegistrations(campaign.totalRegistrations);
-  }, [campaign]);
+    setTotalRegistrations(campaign.registrationCount || 0); // Initialize with the value from campaign
+  }, [campaign]); // Re-run when the campaign changes
 
   return (
     <div className="p-6 flex flex-col items-center justify-center text-white">
@@ -75,7 +74,7 @@ const MarathonDetails = () => {
           <strong>Creator:</strong> {campaign.userName} ({campaign.userEmail})
         </p>
         <p className="text-lg">
-          <strong>Total Registrations:</strong> {campaign.registrationCount}
+          <strong>Total Registrations:</strong> {totalRegistrations}
         </p>
       </div>
 
