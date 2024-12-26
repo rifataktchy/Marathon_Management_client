@@ -4,16 +4,9 @@ import CreateMarathon from '../Pages/CreateMarathon'; // Component to add a mara
 import MyMarathon from '../Pages/MyMarathon'; // Marathon list management
 import MyApplyList from '../Pages/MyApplyList'; // User's applied marathons
 import useDynamicTitle from '../useDynamicTitle';
+
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('home'); // Default active tab
-
-  // Check if user is authenticated (you can change this logic depending on how you're handling authentication)
-  // const isAuthenticated = localStorage.getItem('token'); // Assuming token is stored in localStorage
-
-  // Redirect to login if not authenticated
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/auth/login" replace />;
-  // }
 
   // Components to render based on activeTab
   const renderTabContent = () => {
@@ -30,19 +23,20 @@ const Dashboard = () => {
         return <h1>Page not found</h1>; // Default fallback content
     }
   };
+
   useDynamicTitle();
 
   return (
-    <div className="dashboard-container flex text-white">
+    <div className="dashboard-container flex flex-col lg:flex-row text-white min-h-screen">
       {/* Left Sidebar with Tab Navigation */}
-      <div className="w-1/4 p-4">
-        <h2 className="text-xl font-bold mb-4"></h2>
+      <div className="w-full lg:w-1/4 p-4">
+        <h2 className="text-xl font-bold mb-4">Dashboard</h2>
         <ul className="space-y-2">
           <li>
             <button
               onClick={() => setActiveTab('home')}
               className={`block py-2 px-4 rounded ${
-                activeTab === 'home' ? 'bg-customOrange text-white' : 'text-gray-700'
+                activeTab === 'home' ? 'bg-customOrange text-white' : 'text-gray-300'
               }`}
             >
               Home
@@ -52,7 +46,7 @@ const Dashboard = () => {
             <button
               onClick={() => setActiveTab('add')}
               className={`block py-2 px-4 rounded ${
-                activeTab === 'add' ? 'bg-customOrange text-white' : 'text-gray-700'
+                activeTab === 'add' ? 'bg-customOrange text-white' : 'text-gray-300'
               }`}
             >
               Add Marathon
@@ -62,7 +56,7 @@ const Dashboard = () => {
             <button
               onClick={() => setActiveTab('marathon')}
               className={`block py-2 px-4 rounded ${
-                activeTab === 'marathon' ? 'bg-customOrange text-white' : 'text-gray-700'
+                activeTab === 'marathon' ? 'bg-customOrange text-white' : 'text-gray-300'
               }`}
             >
               My Marathons List
@@ -72,7 +66,7 @@ const Dashboard = () => {
             <button
               onClick={() => setActiveTab('apply')}
               className={`block py-2 px-4 rounded ${
-                activeTab === 'apply' ? 'bg-customOrange text-white' : 'text-gray-700'
+                activeTab === 'apply' ? 'bg-customOrange text-white' : 'text-gray-300'
               }`}
             >
               My Apply List
@@ -82,7 +76,7 @@ const Dashboard = () => {
       </div>
 
       {/* Right Section for Rendering Components */}
-      <div className="content w-3/4 p-6">
+      <div className="content w-full lg:w-3/4 p-6 ">
         {/* Display the corresponding component based on activeTab */}
         {renderTabContent()}
       </div>

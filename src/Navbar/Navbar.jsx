@@ -30,6 +30,31 @@ const Navbar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
       <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
+      <li>{
+     user && user?.email ? (
+     <div className="relative group">
+      <img
+        className="w-10 h-10 rounded-full mr-4"
+        src={user?.photoURL}
+        alt="User Profile"
+      />
+      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-2 bg-gray-700 text-white text-sm rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {user?.displayName || "User"}
+      </div>
+      </div>
+      ) : (
+     <NavLink className="p-2 rounded-lg font-bold text-xl" to="/auth/register">
+      Register
+     </NavLink>
+     )
+     }</li>
+
+<li>{
+      user && user?.email ? (
+        <button className="font-bold text-xl pr-2" onClick={logOut}>Signout</button>
+      ) : (
+      <NavLink className="p-2 rounded-lg font-bold text-xl" to='/auth/login'>Login</NavLink>)
+     }</li>
       {/* <li><NavLink to='/register'>My Apply</NavLink></li>
       <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
       {
@@ -46,7 +71,12 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1 font-bold text-xl">
       <li><NavLink to='/'>Home</NavLink></li>
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
-      <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
+      
+      <div>{
+      user && user?.email ? (
+        <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
+      ) : (<li><NavLink to='/auth/login'>Merathons</NavLink></li>)
+     }</div>
       {/* <li><NavLink to='/register'>My Apply</NavLink></li>
       <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
       {

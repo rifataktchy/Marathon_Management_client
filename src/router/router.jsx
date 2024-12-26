@@ -38,7 +38,7 @@ import NotFoundRedirect from "../components/Pages/NotFoundRedirect";
      
       {
         path: '/allmerathon',
-        element : <AllMarathon></AllMarathon>,
+        element : (<PrivateRoute><AllMarathon></AllMarathon></PrivateRoute>),
         loader: () => fetch('https://merathon-server.vercel.app/events')
     },
     {
