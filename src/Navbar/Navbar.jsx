@@ -1,10 +1,15 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "./Navbar.css";
 import { useContext } from "react";
 import { AuthContext } from "../components/provider/AuthProvider";
 const Navbar = () => {
   const {user,logOut} = useContext(AuthContext);
+  const handleRedirect = () => {
+    
+    // Correct string interpolation for navigate
+    Navigate(`/auth/login`, { state: { from: `/allmerathon` } });
+  };
     return (
         <div>
            <div className="navbar  w-12/12 mx-auto text-white">
@@ -72,11 +77,21 @@ const Navbar = () => {
       <li><NavLink to='/'>Home</NavLink></li>
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
       
-      <div>{
-      user && user?.email ? (
-        <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
-      ) : (<li><NavLink to='/auth/login'>Merathons</NavLink></li>)
-     }</div>
+      <div>
+  {user && user?.email ? (
+    <li>
+      <NavLink to="/allmerathon">Merathons</NavLink>
+    </li>
+  ) : (
+    <li onClick={handleRedirect}>
+      <NavLink to='/allmerathon'
+      >
+        Merathons
+      </NavLink>
+    </li>
+  )}
+</div>
+
       {/* <li><NavLink to='/register'>My Apply</NavLink></li>
       <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
       {
