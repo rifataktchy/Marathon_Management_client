@@ -2,18 +2,20 @@ import { useLoaderData, Link, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useDynamicTitle from '../useDynamicTitle';
-
+import Loading from "./Loading";
 const AllMerathon = () => {
   const campaigns = useLoaderData();
   const { user, logOut } = useContext(AuthContext);
   const [loadedCampaigns, setLoadedCampaigns] = useState(campaigns);
+  const [loading, setLoading] = useState(true);
   const [isAscending, setIsAscending] = useState(true); // Track sort direction
   useDynamicTitle();
   const navigate = useNavigate();
 
-  const handleRedirect = () => {
-    // Redirect to login with the current page path stored in state
-    navigate('/auth/login', { state: `/merathon/${campaigns._id}` });
+  const handleRedirect = (campaignId) => {
+    console.log(campaignId)
+    // Correct string interpolation for navigate
+    navigate(`/auth/login`, { state: { from: `/merathon/${campaignId}` } });
   };
 
   // Function to handle sorting
@@ -29,11 +31,15 @@ const AllMerathon = () => {
       console.log("Sorted campaigns:", sortedCampaigns); 
       // Update the state with the sorted campaigns
       setLoadedCampaigns(sortedCampaigns);
+      setLoading(false);
       console.log("Sorted campaigns:",loadedCampaigns);
     } catch (error) {
       console.error("Error fetching sorted campaigns:", error);
     }
   };
+  if(loading){
+    return <Loading></Loading>
+}
 
   // Effect to set the initial campaigns
   useEffect(() => {
@@ -100,7 +106,7 @@ const AllMerathon = () => {
               ) : (
                 <button
                   className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2"
-                  onClick={handleRedirect}
+                  onClick={() => handleRedirect(campaign._id)}
                 >
                   See Details
                 </button>

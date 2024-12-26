@@ -12,6 +12,9 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    // Get the 'from' location from state (if exists)
+    const from = location.state?.from || "/"; // Default to "/" if 'from' is not available
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -37,7 +40,8 @@ const Login = () => {
                     text: "Welcome back! You have successfully logged in.",
                     confirmButtonColor: "#28a745",
                 }).then(() => {
-                    navigate(location?.state ? location.state : "/");
+                    // After successful login, redirect to 'from' location
+                    navigate(from);  // Navigate to the page that required login
                 });
             })
             .catch((err) => {
@@ -69,7 +73,8 @@ const Login = () => {
                     text: "Welcome back! You have successfully signed in with Google.",
                     confirmButtonColor: "#28a745",
                 }).then(() => {
-                    navigate(location?.state ? location.state : "/");
+                    // After Google login, redirect to 'from' location
+                    navigate(from);  // Navigate to the page that required login
                 });
             })
             .catch((err) => {
@@ -154,3 +159,4 @@ const Login = () => {
 };
 
 export default Login;
+
