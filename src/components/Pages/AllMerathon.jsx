@@ -37,9 +37,7 @@ const AllMerathon = () => {
       console.error("Error fetching sorted campaigns:", error);
     }
   };
-  if(loading){
-    return <Loading></Loading>
-}
+ 
 
   // Effect to set the initial campaigns
   useEffect(() => {

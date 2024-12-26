@@ -21,7 +21,7 @@ const Home = () => {
   const { user, logOut } = useContext(AuthContext);
   useDynamicTitle();
   const navigate = useNavigate();
-
+ 
   const handleRedirect = (campaignId) => {
     console.log(campaignId)
     // Correct string interpolation for navigate
@@ -86,7 +86,7 @@ const Home = () => {
                     Support Innovative Projects
                   </h2>
                   <p className="text-white text-lg">
-                    Join campaigns to for creative ideas and impactful causes.
+                    Join campaigns to for creative ideas and impactful causes. we are waiting for you.
                   </p>
                 </div>
               </div>
