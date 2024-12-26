@@ -23,6 +23,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleRedirect = (campaignId) => {
+    console.log(campaignId)
     // Correct string interpolation for navigate
     navigate(`/auth/login`, { state: { from: `/merathon/${campaignId}` } });
   };
