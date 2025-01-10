@@ -53,7 +53,7 @@ const Upcoming = () => {
   };
 
   return (
-    <section className="upcoming-marathons py-12">
+    <section className="upcoming-marathons py-12 text-white">
       <div className="max-w-screen-xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-center mb-8">
           Upcoming Marathons
@@ -73,13 +73,13 @@ const Upcoming = () => {
 
                 {/* Info */}
                 <div className="p-4">
-                  <h3 className="text-xl font-bold text-gray-800">
+                  <h3 className="text-xl font-bold ">
                     {marathon.title}
                   </h3>
-                  <p className="text-gray-600 mt-2">
+                  <p className=" mt-2">
                     <strong>Location:</strong> {marathon.location}
                   </p>
-                  <p className="text-gray-600 mt-2">
+                  <p className=" mt-2">
                     <strong>Date:</strong>{" "}
                     {new Date(marathon.date).toLocaleDateString()}
                   </p>

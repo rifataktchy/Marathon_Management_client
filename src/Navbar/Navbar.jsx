@@ -1,5 +1,5 @@
 import { Link, Navigate, NavLink } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.jpg";
 import "./Navbar.css";
 import { useContext } from "react";
 import { AuthContext } from "../components/provider/AuthProvider";
@@ -11,9 +11,9 @@ const Navbar = () => {
     Navigate(`/auth/login`, { state: { from: `/allmerathon` } });
   };
     return (
-        <div>
-           <div className="navbar  w-12/12 mx-auto text-white">
-  <div className="navbar-start ">
+        <div className="w-full bg-customOrange">
+           <div className="navbar sticky top-0 z-10 w-11/12 mx-auto text-white justify-between">
+  <div className="">
     <div className="dropdown ">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg
@@ -34,7 +34,20 @@ const Navbar = () => {
         className="menu  font-bold bg-orange-400 menu-sm dropdown-content rounded-box z-50 mt-3 w-52 p-2 shadow">
         <li><NavLink to='/'>Home</NavLink></li>
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
-      <li><NavLink to='/allmerathon'>Merathons</NavLink></li>
+      <li><NavLink to='/allmerathon'>All Merathons</NavLink></li>
+      
+      <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+{
+      user && user?.email ? (
+        <li><NavLink to='/mymerathon'>My Marathon</NavLink></li>
+      ) : ""
+     }
+      {
+      user && user?.email ? (
+        <li><NavLink to='/register'>My Apply</NavLink></li>
+      ) : ""
+     }
+     
       <li>{
      user && user?.email ? (
      <div className="relative group">
@@ -61,23 +74,25 @@ const Navbar = () => {
       <NavLink className="p-2 rounded-lg font-bold text-xl" to='/auth/login'>Login</NavLink>)
      }</li>
       {/* <li><NavLink to='/register'>My Apply</NavLink></li>
+
       <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
-      {
+     
+      {/* {
       user && user?.email ? (
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
       ) : ""
-     }
+     } */}
       {/* <li><NavLink to='/dashboard'>Dashboard</NavLink></li> */}
       </ul>
     </div>
-    <Link className="" to='/'><img className="h-20 w-20 rounded-full" src={logo} alt=""/></Link>
+    <Link className="" to='/'><img className="h-16 w-16 rounded-full" src={logo} alt=""/></Link>
   </div>
 <div className="navbar-end flex-grow hidden lg:flex">
     <ul className="menu menu-horizontal px-1 font-bold text-xl">
       <li><NavLink to='/'>Home</NavLink></li>
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
       
-      <div>
+      {/* <div>
   {user && user?.email ? (
     <li>
       <NavLink to="/allmerathon">Merathons</NavLink>
@@ -90,15 +105,28 @@ const Navbar = () => {
       </NavLink>
     </li>
   )}
-</div>
+</div> */}
+<li><NavLink to='/allmerathon'>All Merathons</NavLink></li>
 
       {/* <li><NavLink to='/register'>My Apply</NavLink></li>
       <li><NavLink to='/mymerathon'>My Merathon</NavLink></li> */}
-      {
+      {/* {
       user && user?.email ? (
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
       ) : ""
+     } */}
+     
+     {
+      user && user?.email ? (
+        <li><NavLink to='/mymerathon'>My Marathon</NavLink></li>
+      ) : ""
      }
+      {
+      user && user?.email ? (
+        <li><NavLink to='/register'>My Apply</NavLink></li>
+      ) : ""
+     }
+     <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
       {/* <li><NavLink to='/dashboard'>Dashboard</NavLink></li> */}
      
      

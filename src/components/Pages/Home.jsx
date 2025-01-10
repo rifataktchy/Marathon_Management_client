@@ -73,13 +73,13 @@ const Home = () => {
       ) : (
         <>
           {/* Banner / Slider */}
-          <section className="banner mb-12">
+          <section className="banner mb-20">
             <Slider {...sliderSettings}>
               <div className="relative">
                 <img
                   src={slide1}
                   alt="Slide 1"
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[400px] object-cover"
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-start bg-black bg-opacity-50 px-8">
                   <h2 className="text-white text-3xl font-bold mb-2">
@@ -95,7 +95,7 @@ const Home = () => {
                 <img
                   src={slide2}
                   alt="Slide 2"
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[400px] object-cover"
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-start bg-black bg-opacity-50 px-8">
                   <h2 className="text-white text-3xl font-bold mb-2">
@@ -111,7 +111,7 @@ const Home = () => {
                 <img
                   src={slide3}
                   alt="Slide 3"
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[400px] object-cover"
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-start bg-black bg-opacity-50 px-8">
                   <h2 className="text-white text-3xl font-bold mb-2">
@@ -130,7 +130,7 @@ const Home = () => {
   {loadedCampaigns.map((campaign) => (
     <div
       key={campaign._id}
-      className="card shadow-md rounded-lg overflow-hidden border border-gray-700 hover:shadow-lg"
+      className="card shadow-md rounded-lg overflow-hidden border text-white border-gray-700 hover:shadow-lg"
     >
       {/* Marathon Image */}
       <img
@@ -141,17 +141,17 @@ const Home = () => {
 
       {/* Marathon Information */}
       <div className="p-4">
-        <h2 className="text-xl font-bold text-gray-800">{campaign.title}</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className="text-xl  font-bold ">{campaign.title}</h2>
+        <p className=" mt-2">
           <strong>Location:</strong> {campaign.location || "N/A"}
         </p>
-        <p className="text-gray-600 mt-2">
+        <p className="mt-2">
           <strong>Registration Start:</strong>{" "}
           {campaign.startRegistrationDate
             ? new Date(campaign.startRegistrationDate).toLocaleDateString()
             : "N/A"}
         </p>
-        <p className="text-gray-600 mt-2">
+        <p className=" mt-2">
           <strong>Registration End:</strong>{" "}
           {campaign.endRegistrationDate
             ? new Date(campaign.endRegistrationDate).toLocaleDateString()
@@ -182,7 +182,7 @@ const Home = () => {
 
 
           {/* Extra Section 1*/}
-          <section className="marathon-section py-12">
+          <section className="marathon-section py-12 text-white">
             <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left: Image */}
               <div
@@ -201,15 +201,15 @@ const Home = () => {
 
               {/* Right: Text */}
               <div className="space-y-4">
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-3xl font-bold ">
                   Marathon Management System
                 </h2>
-                <p className="text-gray-600 text-lg">
+                <p className=" text-lg">
                   Efficiently organize and manage marathons with our cutting-edge
                   system. From participant registrations to real-time tracking and
                   results, we've got you covered.
                 </p>
-                <ul className="pl-5 text-gray-600">
+                <ul className="pl-5 ">
                   <li className="animate__animated animate__fadeInLeft animate__delay-1s">
                     Streamlined registration process
                   </li>

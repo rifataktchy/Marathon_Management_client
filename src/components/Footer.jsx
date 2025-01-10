@@ -2,8 +2,8 @@ import logo from '../assets/logo.png';
 
 const Footer = () => {
   return (
-    <footer className=" text-white py-10">
-      <div className="max-w-screen-xl mx-auto px-6">
+    <footer className=" text-white bg-customOrange py-10">
+      <div className="w-11/12 mx-auto px-6">
         {/* Logo */}
         <div className="flex justify-center items-center mb-8">
           <img className="h-20 w-20 rounded-full" src={logo} alt="Logo" />
@@ -61,7 +61,7 @@ const Footer = () => {
 
         {/* Bottom Footer */}
         <div className="border-t border-gray-700 mt-8 pt-6 text-center">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-white">
             © 2024 Marathon Management System. All rights reserved.
           </p>
         </div>

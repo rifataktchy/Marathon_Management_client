@@ -118,7 +118,7 @@ const MyApplyList = () => {
 
       {/* Registrations Table */}
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
+        <table className="table-auto w-full border-collapse border text-white border-gray-300">
           <thead>
             <tr className="bg-gray-100 text-black">
               <th className="border border-gray-300 px-4 py-2">Marathon Title</th>

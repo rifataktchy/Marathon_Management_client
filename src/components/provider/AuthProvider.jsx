@@ -50,37 +50,47 @@ const AuthProvider = ({ children }) => {
     };
 
     // Track authenticated user
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            console.log('current user', currentUser.email)
-            if (currentUser?.email) {
-                const user = { email: currentUser.email };
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    //         setUser(currentUser);
+    //         console.log('current user', currentUser.email)
+    //         if (currentUser?.email) {
+    //             const user = { email: currentUser.email };
 
-                axios.post('https://merathon-server.vercel.app/jwt', user, { withCredentials: true })
-                    .then(res => {
-                        console.log('login token', res.data);
-                        setLoading(false);
-                    })
+    //             axios.post('https://merathon-server.vercel.app/jwt', user, { withCredentials: true })
+    //                 .then(res => {
+    //                     console.log('login token', res.data);
+    //                     setLoading(false);
+    //                 })
 
-            }
-            else {
-                axios.post('https://merathon-server.vercel.app/logout', {}, {
-                    withCredentials: true
-                })
-                .then(res => {
-                    console.log('logout', res.data);
-                    setLoading(false);
-                })
-            }
+    //         }
+    //         else {
+    //             axios.post('https://merathon-server.vercel.app/logout', {}, {
+    //                 // withCredentials: true
+    //             })
+    //             .then(res => {
+    //                 console.log('logout', res.data);
+    //                 setLoading(false);
+    //             })
+    //         }
             
-        })
+    //     })
 
 
+    //     return () => {
+    //         unsubscribe();
+    //     };
+    // }, []);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            console.log('current user', currentUser);
+            setLoading(false);
+        });
         return () => {
-            unsubscribe();
-        };
-    }, []);
+            return unsubscribe();
+        }
+    }, [])
 
     // Auth context value
     const authInfo = {

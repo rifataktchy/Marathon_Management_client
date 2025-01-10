@@ -90,7 +90,7 @@ const AllMerathon = () => {
           loadedCampaigns.map((campaign) => (
             <div
               key={campaign._id}
-              className="card shadow-md rounded-lg overflow-hidden border border-gray-300 hover:shadow-lg"
+              className="card text-white shadow-md rounded-lg overflow-hidden border border-gray-300 hover:shadow-lg"
             >
               {/* Marathon Image */}
               <img
@@ -101,17 +101,17 @@ const AllMerathon = () => {
 
               {/* Marathon Information */}
               <div className="p-4">
-                <h2 className="text-xl font-bold text-gray-800">{campaign.title}</h2>
-                <p className="text-gray-600 mt-2">
+                <h2 className="text-xl font-bold ">{campaign.title}</h2>
+                <p className="text-white mt-2">
                   <strong>Location:</strong> {campaign.location || "N/A"}
                 </p>
-                <p className="text-gray-600 mt-2">
+                <p className=" mt-2">
                   <strong>Registration Start:</strong>{" "}
                   {campaign.startRegistrationDate
                     ? new Date(campaign.startRegistrationDate).toLocaleDateString()
                     : "N/A"}
                 </p>
-                <p className="text-gray-600 mt-2">
+                <p className=" mt-2">
                   <strong>Registration End:</strong>{" "}
                   {campaign.endRegistrationDate
                     ? new Date(campaign.endRegistrationDate).toLocaleDateString()
@@ -145,6 +145,8 @@ const AllMerathon = () => {
 };
 
 export default AllMerathon;
+
+
 
 
 

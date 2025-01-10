@@ -6,12 +6,12 @@ import MyApplyList from '../Pages/MyApplyList'; // User's applied marathons
 import useDynamicTitle from '../useDynamicTitle';
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('home'); // Default active tab
+  const [activeTab, setActiveTab] = useState('dashboard'); // Default active tab
 
   // Components to render based on activeTab
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'home':
+      case 'dashboard':
         return <h1>Welcome to your Dashboard</h1>;
       case 'add':
         return <CreateMarathon />;
@@ -30,16 +30,16 @@ const Dashboard = () => {
     <div className="dashboard-container flex flex-col lg:flex-row text-white min-h-screen">
       {/* Left Sidebar with Tab Navigation */}
       <div className="w-full lg:w-1/4 p-4">
-        <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+        {/* <h2 className="text-xl font-bold mb-4">Dashboard</h2> */}
         <ul className="space-y-2">
           <li>
             <button
-              onClick={() => setActiveTab('home')}
+              onClick={() => setActiveTab('Dashboard')}
               className={`block py-2 px-4 rounded ${
-                activeTab === 'home' ? 'bg-customOrange text-white' : 'text-gray-300'
+                activeTab === 'dashboard' ? 'bg-customOrange text-white' : 'text-gray-300'
               }`}
             >
-              Home
+              Dashboard
             </button>
           </li>
           <li>
