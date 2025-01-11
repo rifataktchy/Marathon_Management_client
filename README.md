@@ -30,3 +30,16 @@ Database: MongoDB
 Authentication: JWT (JSON Web Token)
 Frontend: Netlify
 Backend: Vercel
+
+To run in Local Machine: npm run dev
+
+
+Dependencies used:
+1. firebase: ^11.0.2
+2. lottie-react: ^2.4.0
+3. react: ^18.3.1
+4. react-dom: ^18.3.1
+5. react-router-dom: ^7.0.2
+6. react-slick: ^0.30.2
+7. slick-carousel: ^1.8.1
+8. sweetalert2: ^11.14.5
