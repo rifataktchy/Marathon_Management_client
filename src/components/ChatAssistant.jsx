@@ -51,7 +51,7 @@ export default function ChatAssistant({ userEmail }) {
             </button>
           </div>
 
-          {/* Messages */}
+         
           <div className="flex-1 overflow-y-auto p-2 max-h-96">
             {messages.map((msg, i) => (
               <div
