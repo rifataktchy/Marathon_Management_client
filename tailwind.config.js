@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        customOrange: "rgba(236, 100, 8, 0.837)",
+        customOrange: "rgb(154 52 18 / var(--tw-bg-opacity, 1))",
       },
     },
   },

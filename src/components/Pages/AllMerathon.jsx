@@ -76,14 +76,14 @@ const AllMerathon = () => {
       <div className="flex justify-end mt-4">
         <button
           onClick={handleSort}
-          className="btn bg-customOrange text-white hover:bg-orange-800 px-4 py-2 rounded"
+          className="btn bg-customOrange text-white hover:bg-orange-700 px-4 py-2 rounded"
         >
           Sort by Created Date ({isAscending ? " Newest" : "Oldest "})
         </button>
       </div>
 
       {/* Cards Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         {loading ? (
           <Loading /> // Show a loading component if data is still being fetched
         ) : (
@@ -96,7 +96,7 @@ const AllMerathon = () => {
               <img
                 src={campaign.image || " "} // Fallback image
                 alt={campaign.title}
-                className="w-full h-48 object-cover"
+                className="w-full p-4 h-48 object-cover"
               />
 
               {/* Marathon Information */}
@@ -123,13 +123,13 @@ const AllMerathon = () => {
               <div className="p-4 border-t">
                 {user && user?.email ? (
                   <Link to={`/merathon/${campaign._id}`}>
-                    <button className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2">
+                    <button className="btn bg-customOrange hover:bg-orange-700 text-white border-none w-full rounded px-4 py-2">
                       See Details
                     </button>
                   </Link>
                 ) : (
                   <button
-                    className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2"
+                    className="btn bg-customOrange hover:bg-orange-700 text-white border-none w-full rounded px-4 py-2"
                     onClick={() => handleRedirect(campaign._id)}
                   >
                     See Details

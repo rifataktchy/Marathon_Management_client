@@ -126,7 +126,7 @@ const Home = () => {
           </section>
 
           {/* Running Campaign Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6 bg-black">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 bg-black">
   {loadedCampaigns.map((campaign) => (
     <div
       key={campaign._id}
@@ -136,7 +136,7 @@ const Home = () => {
       <img
         src={campaign.image || " "} // Fallback image
         alt={campaign.title}
-        className="w-full h-48 object-cover"
+        className="w-full p-4 h-48 object-cover"
       />
 
       {/* Marathon Information */}
@@ -163,13 +163,13 @@ const Home = () => {
       <div className="p-4 border-t">
         {user && user?.email ? (
           <Link to={`/merathon/${campaign._id}`}>
-            <button className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2">
+            <button className="btn bg-customOrange hover:bg-orange-700 text-white border-none w-full rounded px-4 py-2">
               See Details
             </button>
           </Link>
         ) : (
           <button
-            className="btn bg-customOrange hover:bg-orange-800 text-white border-none w-full rounded px-4 py-2"
+            className="btn bg-customOrange hover:bg-orange-700 text-white border-none w-full rounded px-4 py-2"
             onClick={() => handleRedirect(campaign._id)}
           >
             See Details
@@ -225,7 +225,7 @@ const Home = () => {
                 </ul>
                 <Link
                   to="/allmerathon"
-                  className="inline-block mt-4 bg-customOrange text-white py-2 px-6 rounded-lg shadow-md hover:bg-orange-800"
+                  className="inline-block mt-4 bg-customOrange text-white py-2 px-6 rounded-lg shadow-md hover:bg-orange-700"
                 >
                   Learn More
                 </Link>

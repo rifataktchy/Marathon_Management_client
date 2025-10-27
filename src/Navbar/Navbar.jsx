@@ -11,7 +11,7 @@ const Navbar = () => {
     Navigate(`/auth/login`, { state: { from: `/allmerathon` } });
   };
     return (
-        <div className="w-full bg-customOrange">
+        <div className="w-full bg-orange-800">
            <div className="navbar sticky top-0 z-10 w-11/12 mx-auto text-white justify-between">
   <div className="">
     <div className="dropdown ">

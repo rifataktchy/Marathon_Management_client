@@ -93,7 +93,7 @@ const MyMarathon = () => {
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-orange-300">
+            <tr className="bg-orange-800">
               <th className="border border-gray-300 px-4 py-2">Marathon Title</th>
               <th className="border border-gray-300 px-4 py-2">Date</th>
               <th className="border border-gray-300 px-4 py-2">Location</th>
@@ -114,13 +114,13 @@ const MyMarathon = () => {
                 </td>
                 <td className="border border-gray-300 px-4 py-2 space-x-2">
                   <button
-                    className="btn btn-sm bg-customOrange hover:bg-orange-800 border-none"
+                    className="btn btn-sm bg-customOrange hover:bg-orange-700 border-none"
                     onClick={() => handleUpdate(marathon)}
                   >
                     Update
                   </button>
                   <button
-                    className="btn btn-sm  bg-customOrange hover:bg-orange-800 border-none"
+                    className="btn btn-sm  bg-customOrange hover:bg-orange-700 border-none"
                     onClick={() => handleDelete(marathon._id)}
                   >
                     Delete
@@ -199,12 +199,12 @@ const MyMarathon = () => {
               <div className="flex justify-end space-x-2">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary bg-orange-800 hover:bg-orange-700"
                   onClick={() => setIsUpdateModalOpen(false)}
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary  bg-orange-800 hover:bg-orange-700">
                   Save
                 </button>
               </div>
