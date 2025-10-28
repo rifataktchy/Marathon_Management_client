@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 export default function ChatAssistant({ userEmail }) {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{ sender: 'bot', text: 'Hello! I am from Merathon Management System team. How can i assist you?' }]);
   const [input, setInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -62,6 +62,7 @@ export default function ChatAssistant({ userEmail }) {
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-2 max-h-96">
+
             {messages.map((msg, i) => (
               <div key={i} className={`mb-2 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
                 <span
