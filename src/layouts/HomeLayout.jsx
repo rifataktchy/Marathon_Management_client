@@ -6,6 +6,7 @@ import ChatAssistant from '../components/ChatAssistant';
 import { AuthContext } from "../components/provider/AuthProvider";
 import { useContext } from "react";
 
+
 const HomeLayout = () => {
     const {user} = useContext(AuthContext);
     return (
