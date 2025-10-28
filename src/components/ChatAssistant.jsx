@@ -56,7 +56,7 @@ export default function ChatAssistant({ userEmail }) {
         <div className="fixed bottom-4 right-4 z-50 w-80 bg-white shadow-lg rounded-2xl flex flex-col border transition-all duration-300">
           {/* Header */}
           <div className="bg-orange-800 text-white rounded-t-2xl px-3 py-2 flex justify-between items-center">
-            <span className="font-bold">Merathon Assistant</span>
+            <span className="font-bold">Marathon Assistant</span>
             <button className="font-bold" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 

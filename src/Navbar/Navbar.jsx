@@ -34,7 +34,7 @@ const Navbar = () => {
         className="menu  font-bold bg-orange-400 menu-sm dropdown-content rounded-box z-50 mt-3 w-52 p-2 shadow">
         <li><NavLink to='/'>Home</NavLink></li>
       {/* <li><NavLink to='/createmerathon'>Create</NavLink></li> */}
-      <li><NavLink to='/allmerathon'>All Merathons</NavLink></li>
+      <li><NavLink to='/allmerathon'>All Marathons</NavLink></li>
       
       <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
 {
