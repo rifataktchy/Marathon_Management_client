@@ -1,4 +1,4 @@
-Website Name: Marathon Management System
+Website Name: Marathon Management System (AI Assistant with Prompt Engineering)
 
 A comprehensive platform to organize and participate in marathon events. This application connects event organizers with participants, enabling users to create, manage, and explore marathon opportunities with ease.
 
@@ -23,6 +23,8 @@ Secure User Authentication
 6. Integrated JWT-based authentication system ensures secure access to features like event creation and application management.
 Recommendations and Sorting
 
+7.AI Assistant: Powered by OpenAI GPT with prompt engineering. Provides personalized, context-aware marathon info. Returns structured responses with title, message and suggestions.
+
 Technology Used:
 Frontend: React.js, Tailwind CSS
 Backend: Node.js, Express.js
@@ -30,6 +32,7 @@ Database: MongoDB
 Authentication: JWT (JSON Web Token)
 Frontend: Netlify
 Backend: Vercel
+AI Integration: OpenAI GPT via API
 
 To run in Local Machine: npm run dev
 
